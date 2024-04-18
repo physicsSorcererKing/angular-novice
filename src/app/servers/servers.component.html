@@ -1,2 +1,14 @@
-<app-server></app-server>
-<app-server></app-server>
+<div class="p-4">
+  <input type="text" [(ngModel)]="serverInput" />
+  <button [disabled]="!canAddServer || !serverInput" (click)="addServer()">Add Server</button>
+  <p class="p-2">{{ isServerAdded ? "Server Added!" : "LOL that's it" }}</p>
+  <p class="p-2" *ngIf="newServerName">newServerName: {{newServerName}}</p>
+  <!-- ng17+ feature -->
+  @if ( !!newServerName) {
+    <p class="p-2">yay</p>
+  } @else {
+    <code>-_-</code>
+  }
+  <app-server></app-server>
+  <app-server></app-server>
+</div>
