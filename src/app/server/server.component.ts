@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-server',
@@ -6,9 +6,14 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./server.component.scss'],
 })
 export class ServerComponent {
+  @Output() removeServer = new EventEmitter<string>();
   @Input() serverName: string;
   @Input() serverId: string;
   serverStatus: boolean;
+
+  onClickRemoveBtn() {
+    return this.removeServer.emit(this.serverId);
+  }
 
   constructor() {
     this.serverName = '';

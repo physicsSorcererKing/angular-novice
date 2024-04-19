@@ -12,7 +12,14 @@
   } @else {
     <p class="p-2"><code>-_-</code></p>
   }
+  <ul class="d-flex flex-column gap-2 p-0">
   @for (server of servers; track server) {
-    <app-server [serverName]="server.name" [serverId]="server.id"></app-server>
+    <app-server
+      [serverId]="server.id"
+      [serverName]="server.name"
+      (removeServer)="onRemoveServer($event)"
+    >
+    </app-server>
   }
+  </ul>
 </div>

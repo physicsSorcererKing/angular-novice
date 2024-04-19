@@ -46,4 +46,8 @@ export class ServersComponent {
   getLastServerName(): string {
     return this.servers.at(-1).name || '';
   }
+
+  onRemoveServer(targetServerId: string): void {
+    this.servers = this.servers.filter(({ id }) => id !== targetServerId);
+  }
 }

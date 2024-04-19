@@ -1,1 +1,9 @@
-<h2><sub>Server</sub> {{serverName}} <sub><em>({{ serverId }})</em></sub> is <strong [ngStyle]="{color: serverStatus ? 'green' : 'red'}">{{ serverStatus ? 'online' : 'offline' }}</strong></h2>
+<li class="d-flex gap-2">
+  <button
+    class="btn btn-outline-primary"
+    (click)="onClickRemoveBtn()"
+  >
+    Remove
+  </button>
+  <h2><sub>Server</sub> {{serverName}} <sub><em>({{ serverId }})</em></sub> is <strong [ngStyle]="{color: serverStatus ? 'green' : 'red'}">{{ serverStatus ? 'online' : 'offline' }}</strong></h2>
+</li>
