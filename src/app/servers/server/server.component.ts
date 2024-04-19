@@ -7,7 +7,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class ServerComponent implements OnInit {
   @Output() removeServer = new EventEmitter<string>();
-  @Input() serverName: string;
+  @Input({
+    required: true,
+    transform: (value: string) => value.trim(),
+  })
+  serverName: string;
   @Input() serverId: string;
   serverStatus: boolean;
 
