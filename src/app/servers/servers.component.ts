@@ -47,6 +47,12 @@ export class ServersComponent {
     return this.servers.at(-1).name || '';
   }
 
+  onInputKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Enter' && this.serverInput.trim()) {
+      this.addServer();
+    }
+  }
+
   onRemoveServer(targetServerId: string): void {
     this.servers = this.servers.filter(({ id }) => id !== targetServerId);
   }
