@@ -1,4 +1,10 @@
+import { v4 as uuidv4 } from 'uuid';
 import { Component } from '@angular/core';
+
+type Server = {
+  id: string;
+  name: string;
+};
 
 @Component({
   selector: 'app-servers',
@@ -9,9 +15,13 @@ export class ServersComponent {
   canAddServer: boolean = false;
   isServerAdded: boolean = false;
   isServerAddedTimeoutToken: NodeJS.Timeout;
-  servers: number = 2;
+  servers: Server[] = Array(5)
+    .fill('')
+    .map((_, index) => ({
+      id: uuidv4(),
+      name: `server ${index + 1}`,
+    }));
   serverInput: string = '';
-  newServerName: string = '';
 
   constructor() {
     setTimeout(() => (this.canAddServer = true), 64);
@@ -19,10 +29,11 @@ export class ServersComponent {
 
   addServer(): void {
     clearTimeout(this.isServerAddedTimeoutToken);
-    this.newServerName = this.serverInput;
+    this.servers.push({
+      id: uuidv4(),
+      name: this.serverInput,
+    });
     this.serverInput = '';
-    // add a server
-    ++this.servers;
     // change button status
     this.isServerAdded = true;
     // after a timeout set status back to default
@@ -30,5 +41,9 @@ export class ServersComponent {
       () => (this.isServerAdded = false),
       1989,
     );
+  }
+
+  getLastServerName(): string {
+    return this.servers.at(-1).name || '';
   }
 }

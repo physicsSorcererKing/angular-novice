@@ -1,14 +1,18 @@
 <div class="p-4">
   <input type="text" [(ngModel)]="serverInput" />
-  <button [disabled]="!canAddServer || !serverInput" (click)="addServer()">Add Server</button>
-  <p class="p-2">{{ isServerAdded ? "Server Added!" : "LOL that's it" }}</p>
-  <p class="p-2" *ngIf="newServerName">newServerName: {{newServerName}}</p>
+  <button [disabled]="!canAddServer || !serverInput" (click)="addServer()">
+    Add Server
+  </button>
+  <p class="p-2" [ngClass]="{ 'bg-success': isServerAdded }">
+    {{ isServerAdded ? "Server Added!" : "LOL that's it" }}
+  </p>
   <!-- ng17+ feature -->
-  @if ( !!newServerName) {
-    <p class="p-2">yay</p>
+  @if (!!isServerAdded && getLastServerName()) {
+    <p class="p-2">yay, newServerName: {{ getLastServerName() }}</p>
   } @else {
-    <code>-_-</code>
+    <p class="p-2"><code>-_-</code></p>
   }
-  <app-server></app-server>
-  <app-server></app-server>
+  @for (server of servers; track server) {
+    <app-server [serverName]="server.name" [serverId]="server.id"></app-server>
+  }
 </div>

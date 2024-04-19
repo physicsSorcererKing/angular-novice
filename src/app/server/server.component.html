@@ -1,1 +1,1 @@
-<h2>Server {{ serverId }} is {{ serverStatus }}</h2>
+<h2><sub>Server</sub> {{serverName}} <sub><em>({{ serverId }})</em></sub> is <strong [ngStyle]="{color: serverStatus ? 'green' : 'red'}">{{ serverStatus ? 'online' : 'offline' }}</strong></h2>

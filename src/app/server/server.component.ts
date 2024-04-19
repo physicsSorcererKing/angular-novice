@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-server',
@@ -6,11 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./server.component.scss'],
 })
 export class ServerComponent {
-  serverId: number;
-  serverStatus: string;
+  @Input() serverName: string;
+  @Input() serverId: string;
+  serverStatus: boolean;
 
   constructor() {
-    this.serverId = Math.floor(Math.random() * 100);
-    this.serverStatus = Math.random() > 0.5 ? 'online' : 'offline';
+    this.serverName = '';
+    this.serverId = Math.floor(Math.random() * 100).toString();
+    this.serverStatus = Math.random() > 0.5;
   }
 }
