@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  effect,
+  EventEmitter,
+  input,
+  OnInit,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'app-server',
@@ -7,26 +14,27 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class ServerComponent implements OnInit {
   @Output() removeServer = new EventEmitter<string>();
-  @Input({
-    required: true,
+
+  serverName = input.required<string, string>({
     transform: (value: string) => value.trim(),
-  })
-  serverName: string;
-  @Input() serverId: string;
+  });
+  serverId = input<string>(Math.floor(Math.random() * 100).toString());
   serverStatus: boolean;
 
   constructor() {
-    this.serverName = '';
-    this.serverId = Math.floor(Math.random() * 100).toString();
     this.serverStatus = Math.random() > 0.5;
-    console.log('constrctor:', this.serverId);
+    console.log('constrctor:', this.serverId());
+
+    effect(() => {
+      console.log('effect:', this.serverId());
+    });
   }
 
   ngOnInit(): void {
-    console.log('ngOnInit:', this.serverId);
+    console.log('ngOnInit:', this.serverId());
   }
 
   onClickRemoveBtn() {
-    return this.removeServer.emit(this.serverId);
+    return this.removeServer.emit(this.serverId());
   }
 }
