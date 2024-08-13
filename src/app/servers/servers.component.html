@@ -8,13 +8,13 @@
     Add Server
   </button>
   <p class="p-2" [ngClass]="{ 'bg-success': isServerAdded }">
-    {{ isServerAdded ? "Server Added!" : "LOL that's it" }}
+    {{ isServerAdded ? "Server Added!" : "Input something and press 'enter' to add Server" }}
   </p>
   <!-- ng17+ feature -->
   @if (!!isServerAdded && getLastServerName()) {
     <p class="p-2">yay, newServerName: {{ getLastServerName() }}</p>
   } @else {
-    <p class="p-2"><code>-_-</code></p>
+    <p class="p-2"><code>Server List:</code></p>
   }
   <ul class="d-flex flex-column gap-2 p-0">
     @for (server of servers; track server) {
